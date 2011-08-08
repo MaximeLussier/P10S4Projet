@@ -1,0 +1,442 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Français (France) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\P10.ico"
+IDR_TrajectoireTYPE     ICON                    "res\\P10Doc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&Fichier"
+    BEGIN
+        MENUITEM "&Ouvrir trajectoire  \tCtrl+O", OpenTrajectory
+        MENUITEM "Ouvrir image cible\tCtrl+I",  OpenTarget
+        MENUITEM "Ouvrir paramètres des compensateurs\tCtrl+C", OpenCompensators
+        MENUITEM "Enregistrer données des Capteurs\tCtrl+S", SaveSensors
+        MENUITEM "Enregister image filtrée",    ID_FICHIER_ENREGISTERIMAGEFILTR32793
+        MENUITEM SEPARATOR
+        MENUITEM "&Quitter",                    ID_APP_EXIT
+    END
+    POPUP "&Controle"
+    BEGIN
+        MENUITEM "&Remise à Zero\tCtrl+Z",      ControleRAZ
+        MENUITEM "Arrêt Complet\tCtrl+X",       ControleFullStop
+    END
+    POPUP "&Aide"
+    BEGIN
+        MENUITEM "Manuel",                      ID_AIDE_MANUEL
+        MENUITEM "&À propos de P10...",         ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "Z",            RAZeroButton,           VIRTKEY, CONTROL, NOINVERT
+    "X",            FullStopButton,         VIRTKEY, CONTROL, NOINVERT
+    "I",            OpenTarget,             VIRTKEY, CONTROL, NOINVERT
+    "O",            OpenTrajectory,         VIRTKEY, CONTROL, NOINVERT
+    "C",            OpenCompensators,       VIRTKEY, CONTROL, NOINVERT
+    "S",            SaveSensors,            VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "À propos de P10"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
+    LTEXT           "P10, Version Pi",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2011",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "INDEED",IDOK,113,41,50,14,WS_GROUP
+END
+
+IDD_P10_FORM DIALOGEX 0, 0, 839, 460
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Arrêt d'Urgence",FullStopButton,702,290,123,70
+    CTEXT           "",destination,614,214,204,14,SS_CENTERIMAGE | SS_SUNKEN | WS_BORDER
+    PUSHBUTTON      "Remize à Zéro",RAZeroButton,702,369,123,70
+    LTEXT           "Béta",IDC_STATIC,611,29,16,8
+    LTEXT           "Alpha",IDC_STATIC,611,45,19,8
+    LTEXT           "X",IDC_STATIC,611,61,19,8
+    LTEXT           "Y",IDC_STATIC,612,77,19,8
+    LTEXT           "Corde",IDC_STATIC,611,90,19,8
+    LTEXT           "Valeur de beta",beta,649,26,126,13,SS_SUNKEN | WS_BORDER
+    LTEXT           "Valeur de alpha",Alpha,649,42,126,13,SS_SUNKEN | WS_BORDER
+    LTEXT           "Valeur de X",Xw,649,58,126,13,SS_SUNKEN | WS_BORDER
+    LTEXT           "Valeur de Y",Yw,649,74,126,13,SS_SUNKEN | WS_BORDER
+    LTEXT           "Valeur de la corde",Corde,649,90,126,13,SS_SUNKEN | WS_BORDER
+    GROUPBOX        "Capteurs",IDC_STATIC,571,18,254,89
+    LTEXT           "Z",IDC_STATIC,611,159,19,8
+    LTEXT           "Position en Z de la charge",Zc,649,159,126,13,SS_SUNKEN | WS_BORDER
+    PUSHBUTTON      "Démarrage",StartButton,571,290,121,70,WS_DISABLED
+    GROUPBOX        "Position de la charge",IDC_STATIC,571,111,254,67
+    LTEXT           "X",IDC_STATIC,611,127,19,8
+    LTEXT           "Y",IDC_STATIC,612,143,19,8
+    LTEXT           "Position en X de la charge",Xc,649,126,126,13,SS_SUNKEN | WS_BORDER
+    LTEXT           "Position en Y de la charge",Yc,649,142,126,13,SS_SUNKEN | WS_BORDER
+    GROUPBOX        "Messages de status",IDC_STATIC,16,369,453,84
+    LISTBOX         IDC_LIST1,22,382,440,66,LBS_NOINTEGRALHEIGHT | LBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Status",StatusButton,571,369,121,70
+    CONTROL         "",TargeImage,"Static",SS_BLACKFRAME,479,375,78,66
+    CONTROL         "",PictureBox2,"Static",SS_BLACKFRAME | NOT WS_VISIBLE,16,23,542,344
+    LTEXT           "Cible cherchée",IDC_STATIC,494,442,51,11
+    LTEXT           "PSNR avant traitement",IDC_STATIC,614,249,84,8
+    LTEXT           "",PSNR_Avant,707,246,78,13,SS_SUNKEN | WS_BORDER
+    LTEXT           "PSNR après traitement",IDC_STATIC,614,262,84,8
+    LTEXT           "",PSNR_Apres,707,262,78,13,SS_SUNKEN | WS_BORDER
+    CONTROL         "",PictureBox,"Static",SS_BLACKFRAME,16,23,542,344
+    PUSHBUTTON      "Filtrée",BtnFiltree,16,7,67,16,WS_DISABLED
+    PUSHBUTTON      "Bruitée",BtnBruite,84,7,67,16
+    GROUPBOX        "Image",IDC_STATIC,572,184,253,97
+    LTEXT           "en pixels",IDC_STATIC,578,217,36,9
+    PUSHBUTTON      "Originale",BtnOriginale,151,7,67,16
+    PUSHBUTTON      "Acquisition d'image",ButtonTakePic,450,7,107,16
+    CTEXT           "",destination2,613,229,205,14,SS_CENTERIMAGE | SS_SUNKEN | WS_BORDER
+    LTEXT           "Position de la destination détectée (X, Y) en Pixels et En Metres, Conversion Pixel/M :",IDC_STATIC,591,196,221,15
+    LTEXT           "en mètres",IDC_STATIC,577,231,36,9
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040c04e4"
+        BEGIN
+            VALUE "CompanyName", "P10 S4 Usherbrooke"
+            VALUE "FileDescription", "Interface du Transbordeur Autonome"
+            VALUE "FileVersion", "3.14159265"
+            VALUE "InternalName", "P10.exe"
+            VALUE "LegalCopyright", "(c) Lambda Inc. Tous droits réservés."
+            VALUE "OriginalFilename", "P10.exe"
+            VALUE "ProductName", "Transbordeur Autonome"
+            VALUE "ProductVersion", "2.71828183"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x40c, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_P10_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 825
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 453
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDP_OLE_INIT_FAILED     "Échec de l'initialisation d'OLE. Assurez-vous que vous utilisez la bonne version des bibliothèques OLE."
+END
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "P10\n\nP10\nFichiers Trajectoire (*.trj)\n.trj\nP10.Document\nP10.Trajectoire"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "P10"
+    AFX_IDS_IDLEMESSAGE     "Prêt"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "Crée un nouveau document\nNouveau"
+    ID_FILE_OPEN            "Ouvre un document existant\nOuvrir"
+    ID_FILE_CLOSE           "Ferme le document actif\nFermer"
+    ID_FILE_SAVE            "Enregistre le document actif\nEnregistrer"
+    ID_FILE_SAVE_AS         "Enregistre le document actif sous un nouveau nom\nEnregistrer sous"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Affiche des informations concernant le programme, le numéro de version et le copyright\nÀ propos de"
+    ID_APP_EXIT             "Quitte l'application et demande si les documents doivent être enregistrés\nQuitter"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Ouvrir ce document"
+    ID_FILE_MRU_FILE2       "Ouvrir ce document"
+    ID_FILE_MRU_FILE3       "Ouvrir ce document"
+    ID_FILE_MRU_FILE4       "Ouvrir ce document"
+    ID_FILE_MRU_FILE5       "Ouvrir ce document"
+    ID_FILE_MRU_FILE6       "Ouvrir ce document"
+    ID_FILE_MRU_FILE7       "Ouvrir ce document"
+    ID_FILE_MRU_FILE8       "Ouvrir ce document"
+    ID_FILE_MRU_FILE9       "Ouvrir ce document"
+    ID_FILE_MRU_FILE10      "Ouvrir ce document"
+    ID_FILE_MRU_FILE11      "Ouvrir ce document"
+    ID_FILE_MRU_FILE12      "Ouvrir ce document"
+    ID_FILE_MRU_FILE13      "Ouvrir ce document"
+    ID_FILE_MRU_FILE14      "Ouvrir ce document"
+    ID_FILE_MRU_FILE15      "Ouvrir ce document"
+    ID_FILE_MRU_FILE16      "Ouvrir ce document"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Bascule vers le volet de fenêtre suivant\nVolet suivant"
+    ID_PREV_PANE            "Bascule vers le volet de fenêtre précédent\nVolet précédent"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_SPLIT         "Fractionne la fenêtre active en volets\nFractionner"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "Efface la sélection\nEffacer"
+    ID_EDIT_CLEAR_ALL       "Efface tout\nEffacer tout"
+    ID_EDIT_COPY            "Copie la sélection et la place dans le Presse-papiers\nCopier"
+    ID_EDIT_CUT             "Coupe la sélection et la place dans le Presse-papiers\nCouper"
+    ID_EDIT_FIND            "Recherche le texte spécifié\nRechercher"
+    ID_EDIT_PASTE           "Insère le contenu du presse-papiers\nColler"
+    ID_EDIT_REPEAT          "Répète la dernière action\nRépéter"
+    ID_EDIT_REPLACE         "Remplace un texte spécifié par un texte différent\nRemplacer"
+    ID_EDIT_SELECT_ALL      "Sélectionne la totalité du document\nSélectionner tout"
+    ID_EDIT_UNDO            "Annule la dernière action\nAnnuler"
+    ID_EDIT_REDO            "Rétablit l'action précédemment annulée\nRétablir"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_TOOLBAR         "Affiche ou masque la barre d'outils\nActiver/Désactiver Barre d'outils"
+    ID_VIEW_STATUS_BAR      "Affiche ou masque la barre d'état\nActiver/Désactiver Barre d'état"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "Modifie la taille de la fenêtre"
+    AFX_IDS_SCMOVE          "Modifie la position de la fenêtre"
+    AFX_IDS_SCMINIMIZE      "Affiche la fenêtre sous forme d'icône"
+    AFX_IDS_SCMAXIMIZE      "Affiche la fenêtre en plein écran"
+    AFX_IDS_SCNEXTWINDOW    "Bascule vers la fenêtre de document suivante"
+    AFX_IDS_SCPREVWINDOW    "Bascule vers la fenêtre de document précédente"
+    AFX_IDS_SCCLOSE         "Ferme la fenêtre active et demande si les documents doivent être enregistrés"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "Restaure la fenêtre à sa taille normale"
+    AFX_IDS_SCTASKLIST      "Active la liste des tâches"
+END
+
+STRINGTABLE
+BEGIN
+    OpenTrajectory          "Ouvrir un fichier de trajectoire."
+    OpenTarget              "Ouvrir un bitmap contenant la cible."
+END
+
+#endif    // Français (France) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Français (Canada) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRC)
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH_CANADIAN
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
+IDB_BITMAP2             BITMAP                  "res\\Image2.bmp"
+IDB_BITMAP3             BITMAP                  "res\\Image2.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)\r\n"
+    "LANGUAGE 12, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\P10.rc2""  // ressources non modifiées par Microsoft Visual C++\r\n"
+    "#include ""l.FRA\\afxres.rc""          // Composants standard\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Français (Canada) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
+LANGUAGE 12, 1
+#pragma code_page(1252)
+#include "res\P10.rc2"  // ressources non modifiées par Microsoft Visual C++
+#include "l.FRA\afxres.rc"          // Composants standard
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
