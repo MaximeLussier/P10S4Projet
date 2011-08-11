@@ -832,6 +832,7 @@ void CP10App::pointeurCouleur(int couleur, int M, int N, int size, CDC* m_cdc){
 }
 
 //------------------------------------------
+// Fonction pour générer la trajectoire jusqu'au point de dépot
 //Auteur : matlab -> Vincent Lapointe et Benoit Raybaud
 //         c++    -> Maxime Lussier
 //Date : 20 juillet 2011
@@ -1200,8 +1201,8 @@ void CP10App::addCommandToStack(int command){
 
 //------------------------------------------
 //	Fonction pour exécuter le stack d'exécution
-//	Entrées: les tailles en Y et en X de l'image, Le CDC de l'image
-//	Retourne: un array contenant l'image en valeurs de 0-255
+//	Entrées: vide
+//	Retourne: vide
 //	Auteur: Maxime Lussier
 //------------------------------------------
 void CP10App::executeStack(){
@@ -1270,6 +1271,12 @@ void CP10App::executeStack(){
 
 
 }
+//------------------------------------------
+//	Fonction pour vider le stack d'exécution
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 void CP10App::clearStack(){
 	currentCommand = 1;
 	for(int i = 1; i < 9; i++){
@@ -1287,6 +1294,12 @@ void CP10App::updateStack(){
 	executed = false;
 }
 
+//------------------------------------------
+//	Fonction pour vérifier si la charge est arrivée à destination
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 bool CP10App::isAtDestination(){
 	int i;
 	long size;
@@ -1323,7 +1336,12 @@ bool CP10App::isAtDestination(){
 	return false;
 }
 
-
+//------------------------------------------
+//	Fonction pour vérifier si la charge est stable
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 bool CP10App::isStable(){
 	double seuil = 0.005;
 	float  sen[5], cart1[3], cart2[3];
@@ -1359,7 +1377,12 @@ bool CP10App::isStable(){
 	return false;
 }
 
-
+//------------------------------------------
+//	Fonction afficher les messages de retour de l'Api de la grue
+//	Entrées: code du message
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 void CP10App::messages(int id){
 	switch(id){
 	case 0: 
