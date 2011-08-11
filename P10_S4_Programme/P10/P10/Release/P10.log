@@ -1,4 +1,4 @@
-﻿La génération a démarré 2011-08-08 16:20:56.
+﻿La génération a démarré 2011-08-11 14:43:24.
      1>Projet "D:\Mes Documents\Desktop\P10S4Projet\P10_S4_Programme\P10\P10\P10.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
          Création de "Release\P10.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
@@ -10,9 +10,9 @@
          MVOps.cpp
      1>d:\mes documents\desktop\p10s4projet\p10_s4_programme\p10\p10\StdAfx.h(8): warning C4005: '_AFXDLL' : redéfinition de macro
                  arguments de ligne de commande : voir la définition précédente de '_AFXDLL'
-     1>MVOps.cpp(396): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-     1>MVOps.cpp(397): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-     1>MVOps.cpp(403): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+     1>MVOps.cpp(569): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+     1>MVOps.cpp(570): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+     1>MVOps.cpp(576): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
          P10.cpp
      1>d:\mes documents\desktop\p10s4projet\p10_s4_programme\p10\p10\stdafx.h(8): warning C4005: '_AFXDLL' : redéfinition de macro
                  arguments de ligne de commande : voir la définition précédente de '_AFXDLL'
@@ -29,27 +29,27 @@
      1>P10.cpp(824): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
      1>P10.cpp(825): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
      1>P10.cpp(819): warning C4101: 'pixel' : variable locale non référencée
-     1>P10.cpp(866): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>P10.cpp(950): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>P10.cpp(998): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>P10.cpp(1160): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
-     1>P10.cpp(1163): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
-     1>P10.cpp(1167): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
-     1>P10.cpp(1169): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
-     1>P10.cpp(1293): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+     1>P10.cpp(867): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>P10.cpp(951): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>P10.cpp(999): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>P10.cpp(1161): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+     1>P10.cpp(1164): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+     1>P10.cpp(1168): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+     1>P10.cpp(1170): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+     1>P10.cpp(1306): warning C4305: 'initialisation' : troncation de 'double' à 'float'
          P10Doc.cpp
      1>d:\mes documents\desktop\p10s4projet\p10_s4_programme\p10\p10\stdafx.h(8): warning C4005: '_AFXDLL' : redéfinition de macro
                  arguments de ligne de commande : voir la définition précédente de '_AFXDLL'
          P10View.cpp
      1>d:\mes documents\desktop\p10s4projet\p10_s4_programme\p10\p10\stdafx.h(8): warning C4005: '_AFXDLL' : redéfinition de macro
                  arguments de ligne de commande : voir la définition précédente de '_AFXDLL'
-     1>P10View.cpp(267): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(105) : voir la déclaration de 'strcpy'
      1>P10View.cpp(314): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(105) : voir la déclaration de 'strcpy'
-     1>P10View.cpp(346): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>P10View.cpp(361): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(105) : voir la déclaration de 'strcpy'
-     1>P10View.cpp(373): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>P10View.cpp(399): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(105) : voir la déclaration de 'strcpy'
+     1>P10View.cpp(432): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(105) : voir la déclaration de 'strcpy'
          stdafx.cpp
      1>d:\mes documents\desktop\p10s4projet\p10_s4_programme\p10\p10\stdafx.h(8): warning C4005: '_AFXDLL' : redéfinition de macro
@@ -57,22 +57,26 @@
          traitementImage.cpp
      1>d:\mes documents\desktop\p10s4projet\p10_s4_programme\p10\p10\StdAfx.h(8): warning C4005: '_AFXDLL' : redéfinition de macro
                  arguments de ligne de commande : voir la définition précédente de '_AFXDLL'
-     1>traitementImage.cpp(490): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(491): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(492): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(493): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(506): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(507): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(508): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(509): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(524): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(525): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(526): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(527): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(666): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(667): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(668): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
-     1>traitementImage.cpp(669): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(579): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(580): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(581): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(582): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(583): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(584): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(585): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(586): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(596): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(597): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(598): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(599): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(617): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(618): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(619): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(620): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(722): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(723): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(724): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+     1>traitementImage.cpp(725): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
        ResourceCompile:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D NDEBUG /D _AFXDLL /l"0x040c" /IRelease\ /nologo /fo"Release\P10.res" P10.rc 
        Link:
@@ -99,4 +103,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:18.26
+Temps écoulé 00:00:17.70

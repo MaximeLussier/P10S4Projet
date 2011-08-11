@@ -47,7 +47,7 @@ traitementImages::~traitementImages()
 /*************************************************
 fonction pour trouver les paramètres du filtre à peigne par rapport à une image interférée
 Auteurs: P10 Matlab: Marc-André Veilleux
-			   C++ : Maxime Lussier
+C++ : Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
 - x : image non traitée (répertoire de l'image originale)
@@ -100,7 +100,7 @@ double traitementImages::trouverParametres(double** imageM,int M, int N, double*
 /*************************************************
 Fonction qui retourne les indexes des N plus grand peaks du vecteur d'amplitude (Appears to work)
 Auteurs: P10 Matlab: Marc-André Veilleux
-			   C++ : Maxime Lussier
+C++ : Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
 - amplitude : vecteur d'amplitude
@@ -147,7 +147,7 @@ int* traitementImages::TrouverPoints(double* amplitude, int length ,int N){
 /*************************************************
 Filtre les points en entrée pour éliminer les points semblables (Appears to work)
 Auteurs: P10 Matlab: Marc-André Veilleux
-			   C++ : Maxime Lussier
+C++ : Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
 - points : vecteur des indices des maximums
@@ -232,7 +232,7 @@ double* traitementImages::fft(double* inCol, int length)
 Fonction pour filtre l'image d'entrée avec une filtre à peigne avec une fréquence normalisé W0 et une largeur de DeltaW0 trouver les paramètres du filtre à peigne par
 rapport à une image interférée
 Auteurs: P10 Matlab: Marc-André Veuilleux
-				C++: Maxime Lussier
+C++: Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
 - X : image non traitée (répertoire de l'image originale)
@@ -270,7 +270,7 @@ double** traitementImages::filtrer(double** X, int M, int N, double W0, double D
 /**********************************************************************************
 Fonction pour enlever le bruit d'une image.
 Auteurs: P10 Matlab: Michael Fujioka
-				C++: Maxime Lussier
+C++: Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
 - X : image originale
@@ -396,7 +396,7 @@ double** traitementImages::interference(double** X, int M, int N){
 /*************************************************
 Fonction pour filtre l'image d'entrée pour enlever le flou
 Auteurs: P10 Matlab: Marc-André Veuilleux
-				C++: Marc-André Veuilleux
+C++: Marc-André Veuilleux
 Date de création: 2011-07-19
 Entrées:
 - X : image non traitée (répertoire de l'image originale)
@@ -503,7 +503,7 @@ double traitementImages::ValidePixel(double x)
 /*************************************************
 Fonction pour détecter les références et une cible dans une image
 Auteurs: P10 Matlab: Marc-André Veuilleux
-		        C++: Maxime Lussier
+C++: Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
 - X : image
@@ -549,7 +549,7 @@ double** traitementImages::detectImage(double** X, int M, int N, double** target
 /*************************************************
 Fonction pour faire la corrélation des références et d'une cible dans une image
 Auteurs: P10 Matlab: Marc-André Veuilleux
-		        C++: Maxime Lussier
+C++: Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
 - X : image
@@ -576,47 +576,51 @@ double** traitementImages::correlation(double** X, int M, int N, double** target
 	double** Yimg = MVOps::zeros(M,N);
 
 	//On enlève les bordures dans l'image
-	int minX = floor((double)Nt/2);
-	int maxX = floor((double)N-(double)Nt/2)-1;
-	int minY = floor((double)Mt/2);
-	int maxY = floor((double)M-(double)Mt/2)-1;
+	int minXt = floor((double)Nt/2);
+	int maxXt = floor((double)N-(double)Nt/2)-1;
+	int minYt = floor((double)Mt/2);
+	int maxYt = floor((double)M-(double)Mt/2)-1;
+	int minXr = floor((double)Nr/2);
+	int maxXr = floor((double)N-(double)Nr/2)-1;
+	int minYr = floor((double)Mr/2);
+	int maxYr = floor((double)M-(double)Mr/2)-1;
 
 	//Pour tous les lignes de l'image X1  
-	for(int i = minY; i < maxY; i++){
-		for(int j = minX; j < maxX; j++){
-			if(j == 630 && i == 65)
-			{
-				int w = 0;
-			}
+	for(int i = minYr; i < maxYr; i++){
+		for(int j = minXr; j < maxXr; j++){
 			if(X[i][j] < SeuilDetectionNoir){
 				//On respecte le seuil, donc on correle les points noirs.
 
 				//On centre l'image et on le multiplie (le modele)
-				int rowMin = i-floor((double)Mt/2);
-				int rowMax = i+floor((double)Mt/2)-1;
-				int colMin = j-floor((double)Nt/2);
-				int colMax = j+floor((double)Nt/2)-1;
+				if(i >= minYt && i < maxYt && j >= minXt && j < maxXt){
+					int rowMin = i-floor((double)Mt/2);
+					int rowMax = i+floor((double)Mt/2)-1;
+					int colMin = j-floor((double)Nt/2);
+					int colMax = j+floor((double)Nt/2)-1;
+
+					double meanTemp = MVOps::mean(X, rowMin, rowMax, colMin, colMax);
+					double sum = 0;
+
+					for(int k = 0; k < Nt; k++){
+						for(int l = 0; l < Mt; l++){
+							double temp = X[rowMin+l][colMin+k] - meanTemp;
+							double modele = target[l][k] - meanTarget;
+							sum += temp*modele;
+						}
+					}
+					Yimg[i][j] = sum;
+				} else {
+					Yimg[i][j] = 0;
+				}
+
+
+				int rowMin = i-floor((double)Mr/2);
+				int rowMax = i+floor((double)Nr/2)-1;
+				int colMin = j-floor((double)Nr/2);
+				int colMax = j+floor((double)Nr/2)-1;
 
 				double meanTemp = MVOps::mean(X, rowMin, rowMax, colMin, colMax);
 				double sum = 0;
-
-				for(int k = 0; k < Nt; k++){
-					for(int l = 0; l < Mt; l++){
-						double temp = X[rowMin+l][colMin+k] - meanTemp;
-						double modele = target[l][k] - meanTarget;
-						sum += temp*modele;
-					}
-				}
-				Yimg[i][j] = sum;
-
-
-				rowMin = i-floor((double)Mr/2);
-				rowMax = i+floor((double)Nr/2)-1;
-				colMin = j-floor((double)Nr/2);
-				colMax = j+floor((double)Nr/2)-1;
-
-				meanTemp = MVOps::mean(X, rowMin, rowMax, colMin, colMax);
-				sum = 0;
 
 				for(int k = 0; k < Nr; k++){
 					for(int l = 0; l < Mr; l++){
@@ -638,7 +642,7 @@ double** traitementImages::correlation(double** X, int M, int N, double** target
 /*************************************************
 Fonction pour détecter les positions des maximums
 Auteurs: P10 Matlab: Marc-André Veuilleux
-		        C++: Maxime Lussier
+C++: Maxime Lussier
 Date de création: 01-08-2011
 Entrées:
 - X : matrice de corrélation
