@@ -44,15 +44,19 @@ traitementImages::~traitementImages()
 {
 }
 
-/*   fonction pour trouver les paramètres du filtre à peigne par (Appears to work)
-rapport à une image interférée
-auteurs: p10 (mav)
-date de création: 2011-07-19
-entrées:
+/*************************************************
+fonction pour trouver les paramètres du filtre à peigne par rapport à une image interférée
+Auteurs: P10 Matlab: Marc-André Veilleux
+			   C++ : Maxime Lussier
+Date de création: 2011-07-19
+Entrées:
 - x : image non traitée (répertoire de l'image originale)
-sorties:
+- M : nombre de lignes
+- N : nombre de colonnes
+Sorties:
 - w0: fréquence normalisé des interférence
-- deltaw0: largeur de bande normalisé de l'interférence */
+- deltaw0: largeur de bande normalisé de l'interférence (en référence)
+**************************************************/
 double traitementImages::trouverParametres(double** imageM,int M, int N, double* DeltaW0)
 {
 	// Détermination des paramètre constant
@@ -93,6 +97,18 @@ double traitementImages::trouverParametres(double** imageM,int M, int N, double*
 	return W0;
 }
 
+/*************************************************
+Fonction qui retourne les indexes des N plus grand peaks du vecteur d'amplitude (Appears to work)
+Auteurs: P10 Matlab: Marc-André Veilleux
+			   C++ : Maxime Lussier
+Date de création: 2011-07-19
+Entrées:
+- amplitude : vecteur d'amplitude
+- length : longueur du vecteur
+- N : nombre de peaks voulu
+Sorties:
+- les indexes des peaks
+**************************************************/
 // Retourne les indexes des N plus grand peaks du vecteur d'amplitude (Appears to work)
 int* traitementImages::TrouverPoints(double* amplitude, int length ,int N){
 
@@ -128,7 +144,18 @@ int* traitementImages::TrouverPoints(double* amplitude, int length ,int N){
 	return pointsFiltres;
 }
 
-// Filtre les points en entrée pour éliminer les points semblables (Appears to work)
+/*************************************************
+Filtre les points en entrée pour éliminer les points semblables (Appears to work)
+Auteurs: P10 Matlab: Marc-André Veilleux
+			   C++ : Maxime Lussier
+Date de création: 2011-07-19
+Entrées:
+- points : vecteur des indices des maximums
+- amplitude : vecteur d'amplitude
+- length : longueur du vecteur
+Sorties:
+- le vecteur des indices restants
+**************************************************/
 int* traitementImages::FiltrePoints(int* points, double* VecteurAmplitude, int* length){
 	int ConstanteDeSeuil = 5;
 	int* pointsFiltre =  MVOps::zeros(*length);
@@ -155,7 +182,16 @@ int* traitementImages::FiltrePoints(int* points, double* VecteurAmplitude, int* 
 	return temp;
 }
 
-// calcule l'absolue de la fft. (Checked Working)
+/*************************************************
+Fonction pour calculer l'absolue de la fft.
+Auteurs: P10 : Maxime Lussier
+Date de création: 2011-07-19
+Entrées:
+- inCol : colonne à calculer
+- length : longueur de la colonne
+Sorties:
+- fft calculée
+**************************************************/
 double* traitementImages::fft(double* inCol, int length)
 {
 
@@ -195,10 +231,13 @@ double* traitementImages::fft(double* inCol, int length)
 /*************************************************
 Fonction pour filtre l'image d'entrée avec une filtre à peigne avec une fréquence normalisé W0 et une largeur de DeltaW0 trouver les paramètres du filtre à peigne par
 rapport à une image interférée
-Auteurs: P10 (MAV)
+Auteurs: P10 Matlab: Marc-André Veuilleux
+				C++: Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
 - X : image non traitée (répertoire de l'image originale)
+- M : nombre de lignes
+- N : nombre de colonnes
 - W0 : Fréquence normalisé de l'interférence
 - DeltaW0: Largeur de bande normalisé de l'interférence
 Sorties:
@@ -230,18 +269,16 @@ double** traitementImages::filtrer(double** X, int M, int N, double W0, double D
 
 /**********************************************************************************
 Fonction pour enlever le bruit d'une image.
-Auteurs: P10 (MF), (ML)
+Auteurs: P10 Matlab: Michael Fujioka
+				C++: Maxime Lussier
 Date de création: 2011-07-19
 Entrées:
-- image_ori : image originale (répertoire de l'image originale)
-- image_bru : image bruitée (répertoire de l'imgae bruitée)
+- X : image originale
+- M : nombre de lignes
+- N : nombre de colonnes
 Sorties:
-- Zend : l'image originale (double)
-- Yend : l'image bruitée (double)
-- Xend : l'imgae traitée (double)
-- Gain : le gain de l'image traitée
+- Y : image traitée
 ***********************************************************************************/
-// [Zend, Yend, Xend, Gain] = E5_3(image_ori, image_bru)
 double** traitementImages::selEtPoivre(double** X, int M, int N){
 
 	int Xmax = N;
@@ -357,12 +394,14 @@ double** traitementImages::interference(double** X, int M, int N){
 
 
 /*************************************************
-Fonction pour filtre l'image d'entrée avec une filtre à peigne avec une fréquence normalisé W0 et une largeur de DeltaW0 
-trouver les paramètres du filtre à peigne parrapport à une image interférée
-Auteurs: P10 (MAV)
+Fonction pour filtre l'image d'entrée pour enlever le flou
+Auteurs: P10 Matlab: Marc-André Veuilleux
+				C++: Marc-André Veuilleux
 Date de création: 2011-07-19
 Entrées:
 - X : image non traitée (répertoire de l'image originale)
+- M : nombre de lignes
+- N : nombre de colonnes
 Sorties:
 - Y: Image filtrée par le filtre de defloutage
 **************************************************/
@@ -420,6 +459,18 @@ double** traitementImages::filtrerFlou(double** X, int M, int N){
 	return Z;
 }
 
+/*************************************************
+Fonction pour calculer le PSNR entre deux images
+Auteurs: P10 Maxime Lussier
+Date de création: 2011-07-19
+Entrées:
+- Image1 : image à analyse 1
+- Image2 : image à analyse 2
+- M : nombre de lignes
+- N : nombre de colonnes
+Sorties:
+- le PSNR filtré
+**************************************************/
 double traitementImages::PSNR(double** Image1, double** Image2, int M, int N)
 {
 	double Somme = 0;
@@ -433,6 +484,15 @@ double traitementImages::PSNR(double** Image1, double** Image2, int M, int N)
 	return 10*log10((255*255*(double)N*(double)M)/Somme);
 }
 
+/*************************************************
+Fonction pour valider un pixel entre 0 et 255
+Auteurs: P10 Maxime Lussier
+Date de création: 2011-07-19
+Entrées:
+- X : valeur du pixel
+Sorties:
+- valeur validée
+**************************************************/
 double traitementImages::ValidePixel(double x)
 {
 	if (x > 255) return 255;
@@ -440,23 +500,33 @@ double traitementImages::ValidePixel(double x)
 	return x;
 }
 
+/*************************************************
+Fonction pour détecter les références et une cible dans une image
+Auteurs: P10 Matlab: Marc-André Veuilleux
+		        C++: Maxime Lussier
+Date de création: 2011-07-19
+Entrées:
+- X : image
+- M : nombre de lignes
+- N : nombre de colonnes
+- target : cible à trouver
+- Mt : nombre de lignes de la cible
+- Nt : nombre de colonnes de la cible
+- ref : référence à trouver
+- Mr : nombre de lignes de la référence
+- Nr : nombre de colonnes de la référence
+Sorties:
+- matrice contenant les positions des références et de la cible et la conversion pixel/m
+**************************************************/
 double** traitementImages::detectImage(double** X, int M, int N, double** target, int Mt, int Nt, double** ref, int Mr, int Nr){
 	double** Y = MVOps::newMatrix(6, 2);
 	double** Y1 = MVOps::zeros(M, N);
 	double** Y2 = correlation(X, M, N, target, Mt,  Nt, ref, Mr, Nr, Y1);
 	double** refsT = DetectPosition(Y1, M, N, 4);
 
-
-
 	double** refs = MVOps::garderPerpendiculaires(refsT, 4);
 
-
-
 	masquerPoints(Y2, M, N, refs);
-
-
-
-
 
 	MVOps::deleteMatrix(refsT, 4);
 	double** targ = DetectPosition(Y2, M, N, 1);
@@ -476,6 +546,25 @@ double** traitementImages::detectImage(double** X, int M, int N, double** target
 	return Y;
 }
 
+/*************************************************
+Fonction pour faire la corrélation des références et d'une cible dans une image
+Auteurs: P10 Matlab: Marc-André Veuilleux
+		        C++: Maxime Lussier
+Date de création: 2011-07-19
+Entrées:
+- X : image
+- M : nombre de lignes
+- N : nombre de colonnes
+- target : cible à trouver
+- Mt : nombre de lignes de la cible
+- Nt : nombre de colonnes de la cible
+- ref : référence à trouver
+- Mr : nombre de lignes de la référence
+- Nr : nombre de colonnes de la référence
+Sorties:
+- matrice contenant la corrélation de la cible
+- matrice contenant la corrélation de la référence (EN RÉFÉRENCE)
+**************************************************/
 double** traitementImages::correlation(double** X, int M, int N, double** target, int Mt, int Nt, double** ref, int Mr, int Nr, double** corrRef){
 	double SeuilDetectionNoir = 15;
 
@@ -545,69 +634,20 @@ double** traitementImages::correlation(double** X, int M, int N, double** target
 	}
 	return Yimg;
 }
-// Description: Détect les positions des maximums
-// Auteurs: P10 (MF MAV)
-// Date: 01-08-2011
-// Entrées:
-//       corr: la corrélation
-//       N: le nombre des plus hautes corrélations
-// Sorties:
-//       vecteur: le vecteur de la position
-//       maximum: les maximums
-//       imagemodifier: la corrélation avec les points trouvés (carrés gris)
-/*double** traitementImages::DetectPosition(double** X, int M, int N, int Nb){
 
-
-int minDistance = 50;
-
-double** maximums = MVOps::zeros(Nb+1,2); // (x, y)
-double* maximumVal = MVOps::zerosD(Nb+1);
-int nb = 0;
-int currentPosition = 0;
-int lastChanged = 0;
-// Détection des maximums
-for(int i = 0; i < M; i++){
-for(int j = 0; j < N; j++){
-int k;
-for(int k = 0; k < Nb+1; k++){
-if((maximums[k][1] == 0 && maximums[k][1] == 0) ||
-sqrt(pow(i-maximums[k][1], 2)+pow(j-maximums[k][0], 2)) < minDistance){
-if(X[i][j] > maximumVal[k]){
-maximumVal[k] = X[i][j];
-maximums[k][0] = j;
-maximums[k][1] = i;
-if(k < Nb)
-continue;
-}
-} else {
-nb++;
-}
-}
-if(nb == Nb){
-int pos = k;
-double min = maximumVal[k];
-for(int p = 0; p < Nb; p++){
-if(maximumVal[p] < min)
-pos = p;
-}
-if(pos != k){
-maximumVal[pos] = maximumVal[k];
-maximums[pos][0] = maximums[k][0];
-maximums[pos][1] = maximums[k][1];
-maximumVal[k] = 0;
-maximums[k][0] = 0;
-maximums[k][1] = 0;
-}
-}
-
-
-}
-}
-return maximums;
-}
-*/
-
-
+/*************************************************
+Fonction pour détecter les positions des maximums
+Auteurs: P10 Matlab: Marc-André Veuilleux
+		        C++: Maxime Lussier
+Date de création: 01-08-2011
+Entrées:
+- X : matrice de corrélation
+- M : nombre de lignes
+- N : nombre de colonnes
+- Nb : nombre de points cherchés
+Sorties:
+- matrice contenant les indices des maximums
+**************************************************/
 double** traitementImages::DetectPosition(double** X, int M, int N, int Nb){
 	// function [ vecteur, maximum, imagemodifier] = DetectPosition( corr, N )
 	// Initialisation des variables
@@ -657,6 +697,18 @@ double** traitementImages::DetectPosition(double** X, int M, int N, int Nb){
 	return vecteur;
 }
 
+/*************************************************
+Fonction pour masquer avec un carré les références dans la matrice de corréllation
+Auteurs: P10 Maxime Lussier
+Date de création: 01-08-2011
+Entrées:
+- X : matrice de corrélation
+- M : nombre de lignes
+- N : nombre de colonnes
+- refs : matrice des position des références
+Sorties:
+- rien
+**************************************************/
 void traitementImages::masquerPoints(double** X, int M, int N, double** refs){
 	int dimension = 20;
 	for(int i = 0 ; i < 3 ; i++)
@@ -691,7 +743,15 @@ void traitementImages::masquerPoints(double** X, int M, int N, double** refs){
 	}
 }
 
-
+/*************************************************
+Fonction pour trouver les coordonnées en metres de la destination
+Auteurs: P10 Maxime Lussier
+Date de création: 01-08-2011
+Entrées:
+- coor : matrice contenant les positions en pixels
+Sorties:
+rien (positions mises dans la matrice d'entrée
+**************************************************/
 void traitementImages::FindPinv(double** coor)
 {
 	/*
