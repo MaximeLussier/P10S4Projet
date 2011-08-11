@@ -126,9 +126,13 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 	}
 #endif //_DEBUG
 
-
-	// Gestionnaires de messages pour CP10View
-	// Affiche les messages dans la boite sur l'interface
+//------------------------------------------
+//	Gestionnaires de messages pour CP10View
+//  Affiche les messages dans la boite sur l'interface
+//	Entrées: message à afficher
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::AfficherMessageConsole(CString message)
 	{
 		ConsoleBoxControl.AddString(message);
@@ -139,6 +143,12 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 	}
 
 	// Fonction permettant d'obtenir la classe de l'interface à partir de partout...
+//------------------------------------------
+//	Fonction permettant d'obtenir la classe de l'interface à partir de partout...
+//	Entrées: vide
+//	Retourne: l'instance de la "view"
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	CP10View * CP10View::GetView()
 	{
 		CFrameWnd * pFrame = (CFrameWnd *)(AfxGetApp()->m_pMainWnd);
@@ -154,28 +164,49 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 		return (CP10View *) pView;
 	}
 
-	// Code exécuté lorsque le bouton de remise à zéro est appuyé ou dans le menu ou Ctrl+Z
+//------------------------------------------
+//	Code exécuté lorsque le bouton de remise à zéro est appuyé ou dans le menu ou Ctrl+Z
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnBnClickedRazerobutton()
 	{
 		theApp.clearStack();
 		theApp.addCommandToStack(GRAZ);
 	}
 
-	// Code exécuté lorsque le bouton d'arrêt est appuyé ou dans le menu ou Ctrl+X
+
+//------------------------------------------
+//  Code exécuté lorsque le bouton d'arrêt est appuyé ou dans le menu ou Ctrl+X
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnBnClickedFullstopbutton()
 	{
 		theApp.clearStack();
 		theApp.addCommandToStack(GSTOP);
 	}
-
-	// Code exécuté lorsque le bouton de démarrage est appuyé
+	
+//------------------------------------------
+// Code exécuté lorsque le bouton de démarrage est appuyé
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnBnClickedStartbutton()
 	{
 		theApp.addCommandToStack(GRUN);
 		theApp.addCommandToStack(PICTURE);
 	}
 
-
+//------------------------------------------
+//	Fonction exécutée à chaque interval d'un timer
+//	Entrées: l'identificateur du timer
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnTimer(UINT_PTR nIDEvent)
 	{
 		if(nIDEvent == 1){ // si le OnTime est appelé par le timer 1
@@ -201,7 +232,12 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 
 	}
 
-
+//------------------------------------------
+//	Fonction qui actualise les valeurs des capteurs
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::actualiserSensorBoxes(){
 		float sen[5]; //[xw, yw, r, alpha,beta]
 		int res = theApp.getCraneInstance()->GetSensor(sen);
@@ -230,7 +266,13 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 			theApp.messages(res);
 	}
 
-	// Code exécuté lorsque le bouton status est appuyé  
+	  
+//------------------------------------------
+//  Code exécuté lorsque le bouton status est appuyé
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnBnClickedStatusbutton()
 	{
 		int res = theApp.getCraneInstance()->GetCommand();  // On identifie la commande en cours d'exécution
@@ -240,8 +282,13 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 			theApp.messages(res);
 		theApp.getCraneInstance()->ClearErr();
 	}
-
-	// Méthode utilisée lorsqu'on veut spécifier un fichier de trajectoire
+	
+//------------------------------------------
+// Méthode utilisée lorsqu'on veut spécifier un fichier de trajectoire
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnOpentrajectory()
 	{
 		if(theApp.getCraneInstance()->GetCommand() != STOP)
@@ -319,7 +366,13 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 	}
 
 
-	// Fonction executée lorsqu'on veut charger une fichier de configuration des conpensateurs 
+	
+//------------------------------------------
+//  Fonction executée lorsqu'on veut charger une fichier de configuration des conpensateurs 
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnOpenCompensators()
 	{
 		if(theApp.getCraneInstance()->GetCommand() != STOP)
@@ -351,7 +404,13 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 			AfficherMessageConsole(CString("Échec de l'ouverture du fichier ini"));
 	}
 
-	// Fonction executée lorsqu'on veut définir fichier ou les données des capteur seront enregistrés 
+
+//------------------------------------------
+//  Fonction executée lorsqu'on veut définir fichier ou les données des capteur seront enregistrés 
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnSaveSensors() 
 	{
 
@@ -382,7 +441,12 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 			AfficherMessageConsole(CString("Échec de spécification du fichier bin"));
 	}
 
-	// Calculer la position cartésienne de la charge à partir de la position sphérique
+//------------------------------------------
+//  Fonction pour calculer la position cartésienne de la charge à partir de la position sphérique
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------	
 	void CP10View::positionCharge(float* posSpheric, float* posCart){
 		//[xw, yw, r, alpha,beta]
 
@@ -393,6 +457,12 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 		// [Xc, Yc, Zc]
 	}
 
+//------------------------------------------
+//  Code exécuté lorsque le bouton pour l'image filtrée est appuyé
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnBnClickedBtnfiltree()
 	{
 		ButtonFiltreeControl.EnableWindow(FALSE);
@@ -401,7 +471,12 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 		theApp.DisplayImage(&m_Picture, &theApp.m_BMP_filtered, &theApp.m_CDC_filtered);
 	}
 
-
+//------------------------------------------
+//  Code exécuté lorsque le bouton pour l'image bruitée est appuyé
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnBnClickedBtnbruite()
 	{
 		ButtonFiltreeControl.EnableWindow(TRUE);
@@ -411,13 +486,23 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 
 	}
 
-
+//------------------------------------------
+//  Code exécuté lorsque le bouton pour enregister l'image filtrée est appuyé
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnFichierEnregisterimagefiltre()
 	{
 		theApp.sauvegarde();
 	}
 
-
+//------------------------------------------
+//  Code exécuté lorsque le bouton pour l'image originale est appuyé
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnBnClickedBtnoriginale()
 	{
 		ButtonOriginalControl.EnableWindow(FALSE);
@@ -426,7 +511,12 @@ IMPLEMENT_DYNCREATE(CP10View, CFormView)
 		theApp.DisplayImage(&m_Picture, &theApp.m_BMP_original, &theApp.m_CDC_original);
 	}
 
-
+//------------------------------------------
+//  Code exécuté lorsque le bouton pour prendre une image est appuyé
+//	Entrées: vide
+//	Retourne: vide
+//	Auteur: Maxime Lussier
+//------------------------------------------
 	void CP10View::OnBnClickedButtontakepic()
 	{
 		theApp.clearStack();
